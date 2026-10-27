@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Desk Performance Board</title>
+<meta name="description" content="Clients, margin and Greylabs voice testing and evaluation, merged by User ID.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Libraries are kept locally in vendor/ so the page works offline from the CDN and under a strict CSP. -->
+<script src="vendor/supabase-2.117.3.js" defer></script>
+<script src="vendor/xlsx-0.18.5.full.min.js" defer></script>
+<!-- All settings (Supabase project, column names, chart options) live at the top of assets/script.js -->
+<script src="assets/script.js" defer></script>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Compact filter sidebar -->
+  <aside class="fside" id="fside" aria-label="Filters">
+    <div class="fside-h">
+      <h2>Filters <span class="fcount" id="fcount" hidden></span></h2>
+      <button class="linkbtn" id="freset" type="button" hidden>Reset</button>
+      <button class="btn ghost sm ftoggle" id="ftoggle" type="button" aria-expanded="false" aria-controls="fbody">Show</button>
+    </div>
+    <div class="fbody" id="fbody"></div>
+  </aside>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Desk Performance Board</h1>
+        <p class="sub">Clients, margin and Greylabs voice testing and evaluation, merged by User ID.</p>
+      </div>
+      <div class="ticker" id="ticker" aria-live="polite"></div>
+    </header>
+
+    <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+    <div class="main-grid">
+      <section class="panel" aria-labelledby="ov-h">
+        <div class="panel-h toolbar">
+          <h2 id="ov-h">Data overview</h2>
+          <span class="hint grow" id="ov-sub"></span>
+          <button class="linkbtn" id="clearall" type="button" hidden>Clear all filters</button>
+        </div>
+        <div class="tablewrap" id="tw"><table id="tbl"></table></div>
+      </section>
+
+      <aside class="side">
+        <section class="panel" aria-labelledby="d1-h">
+          <div class="panel-h"><h2 id="d1-h">Margin split</h2><span class="hint" id="d1-sub"></span></div>
+          <div id="d1"></div>
+        </section>
+        <section class="panel" aria-labelledby="d2-h">
+          <div class="panel-h"><h2 id="d2-h">Voice task mix</h2><span class="hint">Greylabs</span></div>
+          <div id="d2"></div>
+        </section>
+        <section class="panel" aria-labelledby="h-h">
+          <div class="panel-h"><h2 id="h-h">Merge check</h2></div>
+          <div class="health" id="health"></div>
+        </section>
+      </aside>
+    </div>
+
+    <div class="below-grid">
+      <section class="panel" aria-labelledby="c2-h">
+        <div class="panel-h"><h2 id="c2-h">Voice tasks per day</h2><span class="hint">Voice Testing and Evaluation</span></div>
+        <div class="lg-inline" id="lleg"></div>
+        <div id="line"></div>
+      </section>
+      <section class="panel" aria-labelledby="c1-h">
+        <div class="panel-h"><h2 id="c1-h">Clients by margin</h2><span class="hint" id="c1-sub"></span></div>
+        <div class="lg-inline" id="mleg"></div>
+        <div class="rows" id="mrows"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<button class="btn fab" id="fab" type="button" aria-haspopup="dialog">⬆ Upload data</button>
+<div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sheet-t" hidden></div>
+<div id="fpop" role="dialog" hidden></div>
+<div id="toast" role="status" hidden></div>
+<div id="tip" hidden></div>
+<noscript><p class="empty">This dashboard needs JavaScript.</p></noscript>
+</body>
+</html>
